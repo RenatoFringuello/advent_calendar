@@ -15,6 +15,10 @@ header{
 header img{
     width:50px;
 }
+.navbar-nav .nav-item{
+    cursor: pointer;
+}
+
 footer > .credits {
     font-size: small;
 }

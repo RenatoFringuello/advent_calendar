@@ -20,6 +20,24 @@ function createEle(tag, className = '', contents = [], attributes = []){
     return element;
 }
 
+function setPage(nPage, target, countdownIntervalId, ...presents){
+    console.log(target);
+    target.innerHTML = '';
+    switch (nPage) {
+        case 0:
+            //non funziona; target e presents non sono il problema
+            target.append(createCalendar(presents));
+            showAvailable(1000);
+            return countdownIntervalId;
+        case 1:
+            
+            return countdownIntervalId;
+        case 2:
+            
+            return countdownIntervalId;
+    }
+}
+
 /*----------------------------------
           ADVENT CALENDAR
 ----------------------------------*/
@@ -50,19 +68,27 @@ function createCalendar(presents){
         `;
         row.innerHTML += colCard; 
     });
-
+    
+    const container = createEle('div', 'container-md', [row]);
+   
+    //o fai l'append del container qui dentro 
+    //o crei il button con createEle e crei l'event dentro al foreach
     const usedBtns = document.querySelectorAll('.usedBtn');
+    console.log(usedBtns);
     usedBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
             alert('used');
         });
     });
-
-    const container = createEle('div', 'container-md', [row]);
     return container;
 }
 
-function showAvailable(){
+/**
+ * show the available cards after the delay
+ * 
+ * @param {*} delay is the time in milliseconds
+  */
+function showAvailable(delay){
     const dayCards = document.querySelectorAll('.day');
     const date = new Date();
     setTimeout(function(){
@@ -71,7 +97,7 @@ function showAvailable(){
                 day.classList.add('is-flipped');
             }
         });
-    },1000);
+    },delay);
 }
 
 /*----------------------------------
@@ -105,7 +131,44 @@ const presentsCalendar = [
     {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
     {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
 ];
+const presentsList = [
+    {
+        firstname : 'ciccio',
+        budget : 30,
+        gift : 'car',
+        location : 'german car'
+    },
+    {
+        firstname : 'ciccio',
+        budget : 30,
+        gift : 'car',
+        location : 'german car'
+    },
+    {
+        firstname : 'ciccio',
+        budget : 30,
+        gift : 'car',
+        location : 'german car'
+    }
+];
 //init
 const appPage = document.getElementById('app-page');
+const calendarBtn = document.getElementById('header-calendar');
+const countdownBtn = document.getElementById('header-countdown');
+const presentsListBtn = document.getElementById('header-list-presents');
+let countdownIntervalId;
+
+//open the advent calendar
 appPage.append(createCalendar(presentsCalendar));
-showAvailable();
+showAvailable(1000);
+
+//event listener
+calendarBtn.addEventListener('click', function(){
+    countdownIntervalId = setPage(0, appPage, countdownIntervalId, presentsCalendar);
+}); 
+countdownBtn.addEventListener('click', function(){
+    countdownIntervalId = setPage(1, appPage, countdownIntervalId);
+}); 
+presentsListBtn.addEventListener('click', function(){
+    countdownIntervalId = setPage(2, appPage, countdownIntervalId, presentsList);
+}); 

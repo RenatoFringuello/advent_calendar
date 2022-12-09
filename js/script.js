@@ -21,12 +21,11 @@ function createEle(tag, className = '', contents = [], attributes = []){
 }
 
 function setPage(nPage, target, countdownIntervalId, ...presents){
-    console.log(target);
+    
     target.innerHTML = '';
     switch (nPage) {
         case 0:
-            //non funziona; target e presents non sono il problema
-            target.append(createCalendar(presents));
+            createCalendar(target, presents);
             showAvailable(1000);
             return countdownIntervalId;
         case 1:
@@ -47,7 +46,7 @@ function setPage(nPage, target, countdownIntervalId, ...presents){
  * @param {*} presents the list of presents
  * @returns the container to append
  */
-function createCalendar(presents){
+function createCalendar(target, presents){
     const row = createEle('div','row g-4');
 
     presents.forEach((present) => {
@@ -70,17 +69,15 @@ function createCalendar(presents){
     });
     
     const container = createEle('div', 'container-md', [row]);
+    target.append(container);
    
-    //o fai l'append del container qui dentro 
-    //o crei il button con createEle e crei l'event dentro al foreach
     const usedBtns = document.querySelectorAll('.usedBtn');
-    console.log(usedBtns);
     usedBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            alert('used');
+        btn.addEventListener('click', function(){
+            this.classList.add('my-disabled');
+            this.innerHTML = 'Used';
         });
     });
-    return container;
 }
 
 /**
@@ -97,6 +94,8 @@ function showAvailable(delay){
                 day.classList.add('is-flipped');
             }
         });
+
+        clearTimeout(this);
     },delay);
 }
 
@@ -159,16 +158,16 @@ const presentsListBtn = document.getElementById('header-list-presents');
 let countdownIntervalId;
 
 //open the advent calendar
-appPage.append(createCalendar(presentsCalendar));
+createCalendar(appPage, presentsCalendar);
 showAvailable(1000);
 
 //event listener
 calendarBtn.addEventListener('click', function(){
-    countdownIntervalId = setPage(0, appPage, countdownIntervalId, presentsCalendar);
+    countdownIntervalId = setPage(0, appPage, countdownIntervalId, ...presentsCalendar);
 }); 
 countdownBtn.addEventListener('click', function(){
     countdownIntervalId = setPage(1, appPage, countdownIntervalId);
 }); 
 presentsListBtn.addEventListener('click', function(){
-    countdownIntervalId = setPage(2, appPage, countdownIntervalId, presentsList);
+    countdownIntervalId = setPage(2, appPage, countdownIntervalId, ...presentsList);
 }); 

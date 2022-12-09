@@ -20,20 +20,36 @@ function createEle(tag, className = '', contents = [], attributes = []){
     return element;
 }
 
-function setPage(nPage, target, countdownIntervalId, ...presents){
+function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
     
-    target.innerHTML = '';
-    switch (nPage) {
-        case 0:
-            createCalendar(target, presents);
-            showAvailable(1000);
-            return countdownIntervalId;
-        case 1:
-            
-            return countdownIntervalId;
-        case 2:
-            
-            return countdownIntervalId;
+    if(!btnClicked.classList.contains('active')){
+        //set active
+        const btnActive = document.querySelector('.active');
+        btnActive.classList.remove('active')
+        btnClicked.classList.add('active');
+        //clear main tag
+        target.innerHTML = '';
+        //clear Interval changing page
+        clearInterval(countdownIntervalId);
+        //set page
+        switch (nPage) {
+            case 0:
+                createCalendar(target, presents);
+                showAvailable(1000);
+                return countdownIntervalId;
+            case 1:
+                //create counter
+                createCountdown(target);
+                countdownIntervalId = setInterval(function(){
+                    //overwrite innertext counter
+                    startCounting();
+
+                },500);
+                return countdownIntervalId;
+            case 2:
+                
+                return countdownIntervalId;
+        }
     }
 }
 
@@ -84,7 +100,7 @@ function createCalendar(target, presents){
  * show the available cards after the delay
  * 
  * @param {*} delay is the time in milliseconds
-  */
+ */
 function showAvailable(delay){
     const dayCards = document.querySelectorAll('.day');
     const date = new Date();
@@ -98,6 +114,54 @@ function showAvailable(delay){
         clearTimeout(this);
     },delay);
 }
+
+/*----------------------------------
+             COUNTDOWN
+----------------------------------*/
+/**
+ * create the countdown structure
+ * 
+ * @param {*} target the element to append the container
+ */
+function createCountdown(target){
+    //timer structure
+    const snowWindowImg = createEle('img', 'position-absolute bottom-0 w-100', [], [{type:'src', value: './img/snowWindow.png'}]);
+    const timerElement = createEle('h1', 'm-auto display-1', [], [{type:'id', value:'timer'}]);
+    const container = createEle('div', 'd-flex w-100 h-100 text-white position-relative', [timerElement, snowWindowImg]);
+    target.append(container);
+}
+
+/**
+ * start counting down to the xmas date
+ */
+function startCounting(){
+    const timer = new Date();
+    const timerEle = document.getElementById('timer');
+    let timerString = '00:00:00:00';
+    if(timer.getDate() < 10 && timer.getMonth() + 1 === 12){
+        //fai il countdown fino a dd:24 hh:23 mm:59 ss:59
+        timerString = `${getTwoDigits(9 - timer.getDate())}:${getTwoDigits(23 - timer.getHours())}:${getTwoDigits(59 - timer.getMinutes())}:${getTwoDigits(59 - timer.getSeconds())}`;
+    }
+    else if(timer.getDate() === 10 && timer.getMonth() + 1 === 12){
+        // per tutto il giorno a partire da dd:25 hh:00 mm:00 ss:00 fino a quando non sarà il dd:26
+        timerString = 'Merry Christmas!'
+    }
+    timerEle.innerHTML = timerString;
+}
+
+/**
+ * returns a string with two digits if it's 1 digit
+ * 
+ * @param {*} num the num to check
+ * @returns a string where if it has 1 digit will returned with a 0 ahead
+ */
+function getTwoDigits(num){
+    return (num >= 0 && num < 10) ? `0${num}` : `${num}`;
+}
+
+/*----------------------------------
+            PRESENTS LIST
+----------------------------------*/
 
 /*----------------------------------
                 INIT
@@ -158,16 +222,16 @@ const presentsListBtn = document.getElementById('header-list-presents');
 let countdownIntervalId;
 
 //open the advent calendar
-createCalendar(appPage, presentsCalendar);
-showAvailable(1000);
+// createCalendar(appPage, presentsCalendar);
+// showAvailable(1000);
 
 //event listener
 calendarBtn.addEventListener('click', function(){
-    countdownIntervalId = setPage(0, appPage, countdownIntervalId, ...presentsCalendar);
+    countdownIntervalId = setPage(0, appPage, this, countdownIntervalId, ...presentsCalendar);
 }); 
 countdownBtn.addEventListener('click', function(){
-    countdownIntervalId = setPage(1, appPage, countdownIntervalId);
+    countdownIntervalId = setPage(1, appPage, this, countdownIntervalId);
 }); 
 presentsListBtn.addEventListener('click', function(){
-    countdownIntervalId = setPage(2, appPage, countdownIntervalId, ...presentsList);
+    countdownIntervalId = setPage(2, appPage, this, countdownIntervalId, ...presentsList);
 }); 

@@ -143,7 +143,7 @@ function showAvailable(delay){
  */
 function createCountdown(target){
     //timer structure
-    const snowWindowImg = createEle('img', 'h-100 w-100 my-object-cover-bottom', [], [{type:'src', value: './img/snowWindow.png'}]);
+    const snowWindowImg = createEle('img', 'h-100 w-100 my-object-cover-bottom', [], [{type:'src', value: './assets/img/snowWindow.png'}]);
     const snowContainer = createEle('div', 'snow-container position-absolute bottom-0 w-100', [snowWindowImg]);
     const timerElement = createEle('h1', 'display-1 translate-middle top-50 start-50 position-absolute', [], [{type:'id', value:'timer'}]);
     const container = createEle('div', 'd-flex w-100 h-100 text-white', [timerElement, snowContainer]);

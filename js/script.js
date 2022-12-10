@@ -43,11 +43,10 @@ function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
                 countdownIntervalId = setInterval(function(){
                     //overwrite innertext counter
                     startCounting();
-
                 },500);
                 return countdownIntervalId;
             case 2:
-                
+                createPresentList(target, presents);
                 return countdownIntervalId;
         }
     }
@@ -65,7 +64,7 @@ function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
 function createCalendar(target, presents){
     const row = createEle('div','row g-4');
 
-    presents.forEach((present) => {
+    presents.forEach((present, i) => {
         const usedBtnText = (present.isUsed) ? 'Used' : 'Check as Used';
         const colCard = `
         <div class="scene col-6 col-md-4 col-lg-3 col-xl-2">
@@ -74,7 +73,10 @@ function createCalendar(target, presents){
                     <i class="fa-solid fa-gift m-auto my-color-red"></i>
                 </div>
                 <div class="card-body card__face card__face--back d-flex flex-column justify-content-between p-3 rounded-4">
-                    <h5 class="card-title">${present.title}</h5>
+                    <div>
+                        <h6 class="opacity-50 m-0">#${i+1}</h6>
+                        <h4 class="card-title">${present.title}</h4>
+                    </div>
                     <p class="card-text text-secondary">${present.details}</p>
                     <button href="#" class="btn usedBtn my-btn-red text-white">${usedBtnText}</button>
                 </div>
@@ -138,11 +140,11 @@ function startCounting(){
     const timer = new Date();
     const timerEle = document.getElementById('timer');
     let timerString = '00:00:00:00';
-    if(timer.getDate() < 10 && timer.getMonth() + 1 === 12){
+    if(timer.getDate() < 25 && timer.getMonth() + 1 === 12){
         //fai il countdown fino a dd:24 hh:23 mm:59 ss:59
-        timerString = `${getTwoDigits(9 - timer.getDate())}:${getTwoDigits(23 - timer.getHours())}:${getTwoDigits(59 - timer.getMinutes())}:${getTwoDigits(59 - timer.getSeconds())}`;
+        timerString = `${getTwoDigits(24 - timer.getDate())}:${getTwoDigits(23 - timer.getHours())}:${getTwoDigits(59 - timer.getMinutes())}:${getTwoDigits(59 - timer.getSeconds())}`;
     }
-    else if(timer.getDate() === 10 && timer.getMonth() + 1 === 12){
+    else if(timer.getDate() === 25 && timer.getMonth() + 1 === 12){
         // per tutto il giorno a partire da dd:25 hh:00 mm:00 ss:00 fino a quando non sarà il dd:26
         timerString = 'Merry Christmas!'
     }
@@ -162,6 +164,126 @@ function getTwoDigits(num){
 /*----------------------------------
             PRESENTS LIST
 ----------------------------------*/
+/**
+ * create the container with a nav to add presents and a table width all presents loaded
+ * 
+ * @param {*} target the main element
+ * @param {*} presents the list of presents to load
+ */
+function createPresentList(target, presents){
+    const addPresentsNav = `
+    <nav class="navbar navbar-dark">
+        <h1 class="text-white">Add some presents</h1>
+        <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#presentListNav" aria-controls="presentListNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="presentListNav">
+            <ul class="navbar-nav user-select-none flex-row row g-4">
+                <li class="col-12 col-sm-6 col-lg-3">
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">
+                            <i class="fa-solid fa-user my-color-red"></i>
+                        </span>
+                        <input type="text" class="form-control my-color-red fw-bold" placeholder="Name">
+                    </div>
+                </li>
+                <li class="col-12 col-sm-6 col-lg-3">
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">
+                            <i class="fa-solid fa-sack-dollar my-color-red"></i>
+                        </span>
+                        <input type="number" class="form-control my-color-red fw-bold" placeholder="Budget">
+                    </div>
+                </li>
+                <li class="col-12 col-sm-6 col-lg-3">
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">
+                            <i class="fa-solid fa-gifts my-color-red"></i>
+                        </span>
+                        <input type="text" class="form-control my-color-red fw-bold" placeholder="Gift Name">
+                    </div>
+                </li>
+                <li class="col-12 col-sm-6 col-lg-3">
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">
+                            <i class="fa-solid fa-store my-color-red"></i>
+                        </span>
+                        <input type="text" class="form-control my-color-red fw-bold" placeholder="Marketplace">
+                    </div>
+                </li>
+                <li class="col">
+                    <button type="button" class="btn btn-light w-100 my-color-red fw-bold" id="addPresentBtn">Add Present</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    `;
+    const table = `
+    <table class="table text-white text-center">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Budget</th>
+                <th scope="col">Gift</th>
+                <th scope="col">Location</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+        <tbody id="tbody">
+            
+        </tbody>
+    </table>
+    `;
+    //create container and append nav and empty table
+    const container = createEle('div', 'container-md');
+    container.innerHTML = addPresentsNav + table;
+    target.append(container);
+
+    //load presents
+    loadPresentsList(presents);
+
+    //get form-controls, addPresentBtn
+    const formControls = document.querySelectorAll('.form-control');
+    const addPresentBtn = document.getElementById('addPresentBtn');
+    addPresentBtn.addEventListener('click', function(){
+        presents.push({
+            firstname : formControls[0].value,
+            budget : parseFloat(formControls[1].value, 10).toFixed(2),
+            gift : formControls[2].value,
+            location : formControls[3].value,
+        });
+        loadPresentsList(presents);
+    });    
+}
+
+/**
+ * load all presents in list presents and append it to the tbody
+ * 
+ * @param {*} presents the list of presents to load
+ */
+function loadPresentsList(presents){
+    //add presents to tbody
+    const tbody = document.getElementById('tbody');
+    tbody.innerHTML = '';
+    presents.forEach((present, i)=>{
+        const presentTr = `
+        <tr>
+            <th scope="row">${i+1}</th>
+            <td>${present.firstname}</td>
+            <td>€ ${present.budget}</td>
+            <td>${present.gift}</td>
+            <td>${present.location}</td>
+            <td>
+                <button class="btn w-100">
+                    <i class="fa-solid fa-square-minus text-white"></i>
+                </button>
+            </td>
+        </tr>
+        `;
+        tbody.innerHTML += presentTr;
+    });
+}
 
 /*----------------------------------
                 INIT
@@ -222,8 +344,8 @@ const presentsListBtn = document.getElementById('header-list-presents');
 let countdownIntervalId;
 
 //open the advent calendar
-// createCalendar(appPage, presentsCalendar);
-// showAvailable(1000);
+createCalendar(appPage, presentsCalendar);
+showAvailable(1000);
 
 //event listener
 calendarBtn.addEventListener('click', function(){

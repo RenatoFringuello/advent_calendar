@@ -9,6 +9,7 @@ body{
     height: -webkit-fill-available;
 }
 
+/* header */
 header{
     background-image: linear-gradient(rgba(0, 0, 0, 0.267), rgba(0, 0, 0, 0));
 }
@@ -19,6 +20,7 @@ header img{
     cursor: pointer;
 }
 
+/* footer */
 footer > .credits {
     font-size: small;
 }
@@ -51,12 +53,12 @@ footer > .credits {
     transform: rotateY( 180deg );
 }
 .day.is-flipped {
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
 }
 
 
 .my-color-red{
-    color: var(--main-color);
+    color: var(--main-color) !important;
 }
 
 

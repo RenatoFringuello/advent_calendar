@@ -1,4 +1,16 @@
 /**
+ * get a random between a min and a max -1
+ * 
+ * @param {*} min min random to get, inclusive
+ * @param {*} max max random to get, exclusive
+ * @returns 
+ */
+function getRandom(min, max){
+    const num = Math.floor(Math.random() * (max - min) + min);
+    console.log(num);
+    return num;
+}
+/**
  * 
  * create an element using tag class contents and attributes
  * 
@@ -46,13 +58,16 @@ function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
         //set page
         switch (nPage) {
             case 0:
+                //change color for footer credits
                 credits.classList.remove('my-color-red');
+                
                 createCalendar(target, presents);
                 showAvailable(1000);
                 return countdownIntervalId;
             case 1:
+                //change color for footer credits
                 credits.classList.add('my-color-red');
-
+                
                 //create counter
                 createCountdown(target);
                 countdownIntervalId = setInterval(function(){
@@ -61,7 +76,9 @@ function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
                 },500);
                 return countdownIntervalId;
             case 2:
+                //change color for footer credits
                 credits.classList.remove('my-color-red');
+
                 createPresentList(target, presents);
                 return countdownIntervalId;
         }
@@ -143,10 +160,19 @@ function showAvailable(delay){
  */
 function createCountdown(target){
     //timer structure
+    let randTrees = [];
+    for (let i = 0; i < 50; i++) {
+        const tree = createEle('div','position-absolute display-3 translate-middle-x christmas-tree text-dark',[String.fromCharCode(getRandom(65, 91))]);
+        tree.style.bottom = getRandom(10, 40) + 'px';
+        tree.style.left = getRandom(0, 100) + '%';
+        randTrees.push(tree);
+    }
     const snowWindowImg = createEle('img', 'h-100 w-100 my-object-cover-bottom', [], [{type:'src', value: './assets/img/snowWindow.png'}]);
-    const snowContainer = createEle('div', 'snow-container position-absolute bottom-0 w-100', [snowWindowImg]);
-    const timerElement = createEle('h1', 'display-1 translate-middle top-50 start-50 position-absolute', [], [{type:'id', value:'timer'}]);
-    const container = createEle('div', 'd-flex w-100 h-100 text-white', [timerElement, snowContainer]);
+    const snowContainer = createEle('div', 'snow-container position-absolute bottom-0 w-100', [snowWindowImg, ...randTrees]);
+    const timerElement = createEle('h1', 'm-auto display-1 snowy-christmas my-color-red', [], [{type:'id', value:'timer'}]);
+    const timerContainer = createEle('div', 'col-10 col-md-8 col-lg-6 d-flex translate-middle top-50 start-50 position-absolute bg-white egg-shape', [timerElement]);
+    const timerRow = createEle('div', 'row w-100', [timerContainer]);
+    const container = createEle('div', 'd-flex w-100 h-100', [timerRow, snowContainer]);
     target.append(container);
 }
 

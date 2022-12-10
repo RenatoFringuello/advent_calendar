@@ -95,9 +95,34 @@ footer #credits a{
     border-color: #868686 !important;
 }
 
+/* shapes */
+.countdown-shape {
+    z-index: 1;
+    display: block;
+    height: 180px;
+    
+    border-radius: 40% 80% 36% 30% / 80% 53% 70% 40%
+}
+
+/* filters */
 .filter-white {
     filter: brightness(0) contrast(1) invert(1);
 }
-.filter-red {
-    filter: invert(11%) sepia(97%) saturate(4409%) hue-rotate(357deg) brightness(99%) contrast(112%);
+
+/* fonts family classes */
+.snowy-christmas{
+    font-family: 'Snowy Christmas';
+}
+.christmas-tree{
+    font-family: 'Christmas Trees';
+}
+
+/* font faces */
+@font-face {
+    font-family: 'Snowy Christmas';
+    src: url('../assets/fonts/SnowyChristmas.ttf');
+}
+@font-face {
+    font-family: 'Christmas Trees';
+    src: url('../assets/fonts/ChristmasTrees.otf');
 }

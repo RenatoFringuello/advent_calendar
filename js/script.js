@@ -323,52 +323,33 @@ function loadDeleteBtns(presents){
 ----------------------------------*/
 //presents list
 const presentsCalendar = [
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
-    {title: 'reaglo', details: 'cool present, this is a new car, enjoy this, maan', isUsed : false},
+    {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'pranzo', details: 'un buonissimo pranzo under €50; vale anche la mia cucina (non che il menù sia vastissimo)', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'gita', details: 'una gita mozzafiato a casino di monte bello', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'pranzo', details: 'unambuonissima cena under €50; vale anche la mia cucina (non che il menù sia vastissimo)', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'cinema', details: 'una fantastica serat... vabbè hai capito, scegli un film (al cinema stavolta)', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'gita', details: 'una gita mozzafiato a casino di monte tignosu', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
 ];
-const presentsList = [
-    {
-        firstname : 'ciccio',
-        budget : 30,
-        gift : 'car',
-        location : 'german car'
-    },
-    {
-        firstname : 'ciccio',
-        budget : 30,
-        gift : 'car',
-        location : 'german car'
-    },
-    {
-        firstname : 'ciccio',
-        budget : 30,
-        gift : 'car',
-        location : 'german car'
-    }
-];
+const presentsList = [];
 //init
 const appPage = document.getElementById('app-page');
 const calendarBtn = document.getElementById('header-calendar');

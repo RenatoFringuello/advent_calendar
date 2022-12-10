@@ -357,7 +357,7 @@ function loadDeleteBtns(presents){
 const presentsCalendar = [
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
     {title: 'aperitvivo', details: 'con Antonella', isUsed : false},
-    {title: 'pranzo', details: 'un buonissimo pranzo under €50; vale anche la mia cucina (non che il menù sia vastissimo)', isUsed : false},
+    {title: 'abbraccio', details: 'da 10 secondi (non 1 di più)', isUsed : false},
     {title: 'cagliari', details: 'scendo in Africa', isUsed : false},
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
     {title: 'puzzle', details: 'un puzzle con me', isUsed : false},

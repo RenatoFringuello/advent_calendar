@@ -108,7 +108,7 @@ function createCalendar(target, presents){
                 <div class="card-body card__face card__face--back d-flex flex-column justify-content-between p-2 p-sm-3 rounded-4">
                     <div>
                         <h6 class="opacity-50 m-0">#${i+1}</h6>
-                        <h4 class="card-title">${present.title}</h4>
+                        <h4 class="card-title text-capitalize">${present.title}</h4>
                     </div>
                     <p class="card-text text-secondary">${present.details}</p>
                     <button href="#" class="btn usedBtn my-btn-red text-white rounded-3">${usedBtnText}</button>
@@ -356,29 +356,29 @@ function loadDeleteBtns(presents){
 //presents list
 const presentsCalendar = [
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'aperitvivo', details: 'con Antonella', isUsed : false},
     {title: 'pranzo', details: 'un buonissimo pranzo under €50; vale anche la mia cucina (non che il menù sia vastissimo)', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'cagliari', details: 'scendo in Africa', isUsed : false},
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'puzzle', details: 'un puzzle con me', isUsed : false},
     {title: 'gita', details: 'una gita mozzafiato a casino di monte bello', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'cagliari', details: 'scendo in Africa', isUsed : false},
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
-    {title: '', details: '', isUsed : false},
-    {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'passeggiata', details: 'al mare o in montagna', isUsed : false},
+    {title: 'un pugno di mosche', details: 'no scherzo, è un altro film ma puoi scegliere solo il posto e gli snack', isUsed : false},
+    {title: 'aperitvivo', details: 'con Antonella', isUsed : false},
     {title: 'cena', details: 'una buonissima cena under €50; vale anche la mia cucina (non che il menù sia vastissimo)', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'passeggiata', details: 'al mare o in montagna', isUsed : false},
     {title: 'cheese cake', details: 'una fetta di cheese cake di sig.ra Pasqualina', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'un pugno di mosche', details: 'no scherzo, è un altro film ma puoi scegliere solo il posto e gli snack', isUsed : false},
+    {title: 'cagliari', details: 'scendo in Africa', isUsed : false},
     {title: 'cinema', details: 'una fantastica serat... vabbè hai capito, scegli un film (al cinema stavolta)', isUsed : false},
-    {title: '', details: '', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'e-book', details: 'un e-book under €5', isUsed : false},
+    {title: 'passeggiata', details: 'al mare o in montagna', isUsed : false},
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
-    {title: '', details: '', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'cagliari', details: 'scendo in Africa', isUsed : false},
     {title: 'gita', details: 'una gita mozzafiato a casino di monte tignosu', isUsed : false},
-    {title: '', details: '', isUsed : false},
+    {title: 'passeggiata', details: 'al mare o in montagna', isUsed : false},
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
 ];
 const presentsList = [];

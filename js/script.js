@@ -20,6 +20,16 @@ function createEle(tag, className = '', contents = [], attributes = []){
     return element;
 }
 
+/**
+ * load the page
+ * 
+ * @param {*} nPage the number of the page to open
+ * @param {*} target the main element
+ * @param {*} btnClicked the btn clicked to call this function
+ * @param {*} countdownIntervalId the countdown interval id to clear
+ * @param  {...any} presents the presents to load in Calendar or Presents List
+ * @returns the countdownIntervalId can be undefined if the interval is cleared
+ */
 function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
     
     if(!btnClicked.classList.contains('active')){
@@ -31,13 +41,18 @@ function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
         target.innerHTML = '';
         //clear Interval changing page
         clearInterval(countdownIntervalId);
+        //get footer credits
+        const credits = document.getElementById('credits');
         //set page
         switch (nPage) {
             case 0:
+                credits.classList.remove('my-color-red');
                 createCalendar(target, presents);
                 showAvailable(1000);
                 return countdownIntervalId;
             case 1:
+                credits.classList.add('my-color-red');
+
                 //create counter
                 createCountdown(target);
                 countdownIntervalId = setInterval(function(){
@@ -46,6 +61,7 @@ function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
                 },500);
                 return countdownIntervalId;
             case 2:
+                credits.classList.remove('my-color-red');
                 createPresentList(target, presents);
                 return countdownIntervalId;
         }
@@ -128,8 +144,8 @@ function showAvailable(delay){
 function createCountdown(target){
     //timer structure
     const snowWindowImg = createEle('img', 'position-absolute bottom-0 w-100', [], [{type:'src', value: './img/snowWindow.png'}]);
-    const timerElement = createEle('h1', 'm-auto display-1', [], [{type:'id', value:'timer'}]);
-    const container = createEle('div', 'd-flex w-100 h-100 text-white position-relative', [timerElement, snowWindowImg]);
+    const timerElement = createEle('h1', 'display-1 translate-middle top-50 start-50 position-absolute', [], [{type:'id', value:'timer'}]);
+    const container = createEle('div', 'd-flex w-100 h-100 text-white', [timerElement, snowWindowImg]);
     target.append(container);
 }
 
@@ -268,14 +284,14 @@ function loadPresentsList(presents){
     tbody.innerHTML = '';
     presents.forEach((present, i)=>{
         const presentTr = `
-        <tr>
+        <tr class="align-middle">
             <th scope="row">${i+1}</th>
             <td>${present.firstname}</td>
             <td>€ ${present.budget}</td>
             <td>${present.gift}</td>
             <td>${present.location}</td>
             <td>
-                <button class="btn w-100">
+                <button class="btn w-100 deletePresentBtn">
                     <i class="fa-solid fa-square-minus text-white"></i>
                 </button>
             </td>
@@ -283,6 +299,23 @@ function loadPresentsList(presents){
         `;
         tbody.innerHTML += presentTr;
     });
+
+    const deletePresentBtns = document.querySelectorAll('.deletePresentBtn');
+    deletePresentBtns.forEach((deletePresentBtn, i)=>{
+        deletePresentBtn.addEventListener('click', function(){
+            presents.splice(i, 1);
+            loadPresentsList(presents);
+        }, {once:true});
+    });
+}
+
+/**
+ * load all delete present in list for every present il list
+ * 
+ * @param {*} presents the list of presents
+ */
+function loadDeleteBtns(presents){
+    
 }
 
 /*----------------------------------

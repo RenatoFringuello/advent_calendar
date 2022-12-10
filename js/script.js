@@ -296,6 +296,11 @@ function createPresentList(target, presents){
             gift : formControls[2].value,
             location : formControls[3].value,
         });
+
+        formControls.forEach((formControl)=>{
+            formControl.value = '';
+        });
+
         loadPresentsList(presents);
     });    
 }

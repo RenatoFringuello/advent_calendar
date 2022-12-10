@@ -78,17 +78,17 @@ function setPage(nPage, target, btnClicked, countdownIntervalId, ...presents){
  * @returns the container to append
  */
 function createCalendar(target, presents){
-    const row = createEle('div','row g-4');
+    const row = createEle('div','row g-3 g-md-4');
 
     presents.forEach((present, i) => {
         const usedBtnText = (present.isUsed) ? 'Used' : 'Check as Used';
         const colCard = `
         <div class="scene col-6 col-md-4 col-lg-3 col-xl-2">
             <div class="day card rounded-4 text-center">
-                <div class="card__face card__face--front display-1 d-flex p-3">
+                <div class="card__face card__face--front display-1 d-flex p-2 p-sm-3">
                     <i class="fa-solid fa-gift m-auto my-color-red"></i>
                 </div>
-                <div class="card-body card__face card__face--back d-flex flex-column justify-content-between p-3 rounded-4">
+                <div class="card-body card__face card__face--back d-flex flex-column justify-content-between p-2 p-sm-3 rounded-4">
                     <div>
                         <h6 class="opacity-50 m-0">#${i+1}</h6>
                         <h4 class="card-title">${present.title}</h4>

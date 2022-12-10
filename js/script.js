@@ -170,7 +170,7 @@ function createCountdown(target){
     const snowWindowImg = createEle('img', 'h-100 w-100 my-object-cover-bottom', [], [{type:'src', value: './assets/img/snowWindow.png'}]);
     const snowContainer = createEle('div', 'snow-container position-absolute bottom-0 w-100', [snowWindowImg, ...randTrees]);
     const timerElement = createEle('h1', 'm-auto display-1 snowy-christmas my-color-red', [], [{type:'id', value:'timer'}]);
-    const timerContainer = createEle('div', 'col-10 col-md-8 col-lg-6 d-flex translate-middle top-50 start-50 position-absolute bg-white egg-shape', [timerElement]);
+    const timerContainer = createEle('div', 'col-10 col-md-8 col-lg-6 d-flex translate-middle top-50 start-50 position-absolute bg-white countdown-shape', [timerElement]);
     const timerRow = createEle('div', 'row w-100', [timerContainer]);
     const container = createEle('div', 'd-flex w-100 h-100', [timerRow, snowContainer]);
     target.append(container);

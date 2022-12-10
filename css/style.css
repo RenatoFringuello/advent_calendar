@@ -63,7 +63,16 @@ footer #credits a{
     transform: rotateY(-180deg);
 }
 
+/* countdown */
+.snow-container{
+    height: 300px;
+}
 
+/* my classes */
+.my-object-cover-bottom{
+    object-fit: cover;
+    object-position: bottom;
+}
 .my-color-red{
     color: var(--main-color) !important;
 }

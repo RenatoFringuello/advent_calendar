@@ -143,9 +143,10 @@ function showAvailable(delay){
  */
 function createCountdown(target){
     //timer structure
-    const snowWindowImg = createEle('img', 'position-absolute bottom-0 w-100', [], [{type:'src', value: './img/snowWindow.png'}]);
+    const snowWindowImg = createEle('img', 'h-100 w-100 my-object-cover-bottom', [], [{type:'src', value: './img/snowWindow.png'}]);
+    const snowContainer = createEle('div', 'snow-container position-absolute bottom-0 w-100', [snowWindowImg]);
     const timerElement = createEle('h1', 'display-1 translate-middle top-50 start-50 position-absolute', [], [{type:'id', value:'timer'}]);
-    const container = createEle('div', 'd-flex w-100 h-100 text-white', [timerElement, snowWindowImg]);
+    const container = createEle('div', 'd-flex w-100 h-100 text-white', [timerElement, snowContainer]);
     target.append(container);
 }
 
@@ -333,11 +334,11 @@ const presentsCalendar = [
     {title: '', details: '', isUsed : false},
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
     {title: '', details: '', isUsed : false},
-    {title: '', details: '', isUsed : false},
-    {title: 'pranzo', details: 'unambuonissima cena under €50; vale anche la mia cucina (non che il menù sia vastissimo)', isUsed : false},
-    {title: '', details: '', isUsed : false},
     {title: 'film', details: 'una fantastica serata film che spero faccia da sottofondo', isUsed : false},
     {title: '', details: '', isUsed : false},
+    {title: 'cena', details: 'una buonissima cena under €50; vale anche la mia cucina (non che il menù sia vastissimo)', isUsed : false},
+    {title: '', details: '', isUsed : false},
+    {title: 'cheese cake', details: 'una fetta di cheese cake di sig.ra Pasqualina', isUsed : false},
     {title: '', details: '', isUsed : false},
     {title: 'cinema', details: 'una fantastica serat... vabbè hai capito, scegli un film (al cinema stavolta)', isUsed : false},
     {title: '', details: '', isUsed : false},

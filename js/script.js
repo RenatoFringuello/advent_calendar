@@ -388,7 +388,7 @@ const calendarBtn = document.getElementById('header-calendar');
 const countdownBtn = document.getElementById('header-countdown');
 const presentsListBtn = document.getElementById('header-list-presents');
 let countdownIntervalId;
-
+ 
 //open the advent calendar
 createCalendar(appPage, presentsCalendar);
 showAvailable(1000);
